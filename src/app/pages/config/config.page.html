@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configurações</ion-title>
+  </ion-toolbar>
+  <ion-button expand="block" fill="clear" shape="round" (click)="goHome()">
+    Retornar para Home
+  </ion-button>
+</ion-header>
+
+<ion-content class="config-content">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Personalização</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Tema -->
+      <ion-item>
+        <ion-label>Tema escuro</ion-label>
+        <ion-toggle
+          [checked]="theme === 'dark'"
+          (ionChange)="toggleTheme($event)"
+        ></ion-toggle>
+      </ion-item>
+
+      <!-- Fonte -->
+      <ion-item>
+        <ion-label>Fonte</ion-label>
+        <ion-segment [(ngModel)]="fontSize" (ionChange)="apply()">
+          <ion-segment-button value="small">
+            <ion-label>Pequena</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="medium">
+            <ion-label>Média</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="large">
+            <ion-label>Grande</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-item>
+
+      <!-- Avatar -->
+      <ion-item lines="none">
+        <ion-label position="stacked">Imagem de perfil</ion-label>
+        <div class="avatar-list">
+          <div
+            *ngFor="let a of avatars"
+            class="avatar-option"
+            [class.selected]="a === avatar"
+            (click)="selectAvatar(a)"
+          >
+            <ion-avatar>
+              <img [src]="a" />
+            </ion-avatar>
+          </div>
+        </div>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

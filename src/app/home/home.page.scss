@@ -1,27 +1,269 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+:host {
+  --header-height: 64px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+/* ===== HEADER ===== */
+
+ion-header {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
 }
 
-#container p {
+ion-toolbar {
+  --background: linear-gradient(90deg, #1b122b 0%, #24153a 50%, #3a1e7a 100%);
+  --color: #ffffff;
+  min-height: var(--header-height);
+  padding: 0 8px;
+}
+
+ion-title {
+  display: flex;
+  align-items: center;
   font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
-#container a {
-  text-decoration: none;
+ion-title span {
+  margin-left: 6px;
+}
+
+/* botão Entrar roxo */
+ion-toolbar ion-button {
+  --border-radius: 999px;
+  --background: linear-gradient(90deg, #a24bff, #f24dfc);
+  --box-shadow: 0 4px 14px rgba(208, 101, 255, 0.6);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  padding-inline: 14px;
+}
+
+/* avatar no lugar do botão */
+ion-toolbar ion-avatar {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #f24dfc;
+  box-shadow: 0 0 10px rgba(242, 77, 252, 0.7);
+}
+
+/* ===== CONTENT GERAL ===== */
+
+.home-content {
+  --background: #050407;
+  background: radial-gradient(circle at top, #25153c 0%, #050407 45%, #020204 100%);
+  color: #ffffff;
+}
+
+.home-content ::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* limitar largura como se fosse tela de celular */
+.home-content {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.container {
+  padding-bottom: 24px;
+}
+
+/* ===== SEARCHBAR ===== */
+
+.search-container {
+  padding: 14px 14px 6px;
+  position: relative;
+}
+
+ion-searchbar {
+  --background: #18181d;
+  --color: #ffffff;
+  --placeholder-color: #777777;
+  --icon-color: #ffffff;
+  --clear-button-color: #ffffff;
+  --border-radius: 999px;
+  --box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+  padding: 0;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.search-container .search-icon {
+  position: absolute;
+  right: 22px;
+  top: 8px;
+  border: none;
+  background: transparent;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-container .search-icon img{ width:20px; height:20px; filter: invert(1) hue-rotate(260deg) saturate(1.2); }
+
+/* tirar bordas internas padrão do iOS/MD */
+ion-searchbar .searchbar-input-container {
+  border-radius: 999px !important;
+}
+
+/* ===== ATALHOS (bolinha + quadradinhos) ===== */
+
+.recent-container {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px 8px;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+/* estilo geral dos cards de atalho */
+.recent-card {
+  min-width: 42px;
+  min-height: 42px;
+  max-width: 56px;
+  max-height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #e6e6e6 0%, #d9d9d9 100%);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  text-align: center;
+  color: #222;
+  padding: 6px;
+}
+
+/* primeiro como avatar redondo */
+.recent-card:first-child {
+  border-radius: 50%;
+  width: 66px;
+  height: 66px;
+  min-width: 66px;
+  min-height: 66px;
+  background: radial-gradient(circle at 30% 0, #ffffff 0%, #e6e6e6 45%, #cfcfcf 100%);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+}
+
+/* esconder texto nos cards, é só visual (igual ao mock) */
+.recent-card p {
+  display: none;
+}
+
+/* ===== FILTROS (Explorar / Notícias / Esportes) ===== */
+
+.filters-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px 16px 18px;
+}
+
+.filters-container ion-button {
+  --border-radius: 999px;
+  --padding-top: 6px;
+  --padding-bottom: 6px;
+  --padding-start: 18px;
+  --padding-end: 18px;
+  --border-color: rgba(255, 255, 255, 0.25);
+  --border-width: 1px;
+  --box-shadow: 0 0 0 transparent;
+  text-transform: none;
+  font-size: 12px;
+}
+
+/* botão ativo fica roxinho */
+.filters-container ion-button[color="primary"] {
+  --background: linear-gradient(90deg, #a24bff, #f24dfc);
+  --border-color: transparent;
+  --color: #ffffff;
+}
+
+/* ===== LISTA DE NOTÍCIAS ===== */
+
+ion-list {
+  background: transparent;
+  padding: 0 0 20px;
+}
+
+/* card com degradê branco/cinza tipo o mock */
+ion-card {
+  --background: transparent;
+  margin: 18px 14px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+/* “fade” do rodapé pra encaixar o texto */
+ion-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.6) 75%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+/* garante que o conteúdo fique por cima do fade */
+ion-card-header,
+ion-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+ion-card-header {
+  padding: 10px 12px 0;
+}
+
+ion-card-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+ion-card-subtitle {
+  font-size: 10px;
+  color: #cccccc;
+}
+
+/* conteúdo com texto na base */
+ion-card-content {
+  padding: 26px 14px 12px;
+  font-size: 11px;
+  color: #ffffff;
+}
+
+/* custom card internal image placeholder */
+.cards ion-card {
+  background: transparent;
+  border-radius: 18px;
+}
+.card-image {
+  height: 220px;
+  background: #e9e9e9;
+  border-radius: 12px;
+  margin: 12px;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  position: relative;
+  margin-top: -36px;
+}
+.card-avatar {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(242,77,252,0.9);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.6);
+}
+.card-text .card-source { color: #e6e6e6; font-size: 11px; }
+.card-text .card-title { color: #ffffff; font-weight: 600; font-size: 13px; }
+
+/* infinite scroll (spinner) */
+ion-infinite-scroll-content {
+  --color: #ffffff;
 }

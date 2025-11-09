@@ -1,12 +1,128 @@
-import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule, InfiniteScrollCustomEvent } from '@ionic/angular';
+import { NewsService } from '../services/news';
+import { SettingsService } from '../services/settings';
+import { AuthService } from '../services/auth';
+import { Router } from '@angular/router';
 
+type FilterType = 'all' | 'news' | 'sports';
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  standalone: true,
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
+  imports: [IonicModule, CommonModule, FormsModule]
 })
-export class HomePage {
-  constructor() {}
+export class HomePage implements OnInit {
+  articles: any[] = [];
+  page = 1;
+  pageSize = 10;
+  loading = false;
+  noMore = false;
+
+  filter: FilterType = 'all';
+  searchText = '';
+
+  lastArticles: any[] = [];
+  avatarUrl = '';
+  isLogged = false;
+
+  constructor(
+    private news: NewsService,
+    private settings: SettingsService,
+    private auth: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.loadNews();
+
+    this.settings.settings$.subscribe(s => {
+      this.lastArticles = s.lastArticles;
+      this.avatarUrl = s.avatar;
+    });
+
+    this.auth.user$.subscribe(u => {
+      this.isLogged = !!u;
+    });
+  }
+
+  get categoryForFilter(): 'general' | 'sports' | '' {
+    if (this.filter === 'news') return 'general';
+    if (this.filter === 'sports') return 'sports';
+    return '';
+  }
+
+  loadNews(event?: InfiniteScrollCustomEvent) {
+    if (this.loading || this.noMore) {
+      event?.target.complete();
+      return;
+    }
+    this.loading = true;
+
+    const observable = this.searchText
+      ? this.news.searchEverything(this.searchText, this.page, this.pageSize)
+      : this.news.getTopHeadlines(
+          this.page,
+          this.pageSize,
+          this.categoryForFilter
+        );
+
+    observable.subscribe({
+      next: res => {
+        const newArticles = (res as any).articles || [];
+        if (newArticles.length < this.pageSize) {
+          this.noMore = true;
+        }
+        this.articles = [...this.articles, ...newArticles];
+        this.page++;
+        this.loading = false;
+        event?.target.complete();
+      },
+      error: () => {
+        this.loading = false;
+        event?.target.complete();
+      }
+    });
+  }
+
+  refresh() {
+    this.page = 1;
+    this.articles = [];
+    this.noMore = false;
+    this.loadNews();
+  }
+
+  onFilterChange(type: FilterType) {
+    this.filter = type;
+    this.searchText = '';
+    this.refresh();
+  }
+
+  onSearchChange(ev: any) {
+    this.searchText = ev.detail.value;
+    this.page = 1;
+    this.articles = [];
+    this.noMore = false;
+    this.loadNews();
+  }
+
+  openArticle(article: any) {
+    this.settings.addLastArticle(article);
+    window.open(article.url, '_blank');
+  }
+
+  selectLastArticle(article: any) {
+    this.openArticle(article);
+  }
+
+  goLogin() {
+    this.router.navigateByUrl('/login');
+  }
+
+  goConfig() {
+    this.router.navigateByUrl('/config');
+  }
 }

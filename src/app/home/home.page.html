@@ -1,20 +1,90 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <div class="header-left">
+      <div class="logo-box">
+        <img src="assets/icon/icon-192.png" alt="logo" />
+      </div>
+      <div class="brand">MORENO</div>
+    </div>
+
+    <ion-buttons slot="end">
+      <ion-button class="login-btn" *ngIf="!isLogged" (click)="goLogin()">Entrar</ion-button>
+      <ion-avatar *ngIf="isLogged" (click)="goConfig()">
+        <img [src]="avatarUrl" />
+      </ion-avatar>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="home-content">
+  <div class="container">
+    <!-- Search -->
+    <div class="search-container">
+      <ion-searchbar
+        placeholder="Pesquisar na Web"
+        (ionChange)="onSearchChange($event)"
+        [value]="searchText"
+        showCancelButton="false"
+      ></ion-searchbar>
+      <button class="search-icon" aria-hidden>
+        <img src="assets/tv-icon.png" alt="tv" />
+      </button>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <!-- Avatars / shortcuts -->
+    <div class="recent-container">
+      <div class="recent-card avatar-big"></div>
+      <div class="recent-card" *ngFor="let i of [1,2,3,4,5]"></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-container">
+      <ion-button
+        fill="outline"
+        size="small"
+        [color]="filter === 'all' ? 'primary' : 'medium'"
+        (click)="onFilterChange('all')"
+      >
+        Explorar
+      </ion-button>
+
+      <ion-button
+        fill="outline"
+        size="small"
+        [color]="filter === 'news' ? 'primary' : 'medium'"
+        (click)="onFilterChange('news')"
+      >
+        Notícias
+      </ion-button>
+
+      <ion-button
+        fill="outline"
+        size="small"
+        [color]="filter === 'sports' ? 'primary' : 'medium'"
+        (click)="onFilterChange('sports')"
+      >
+        Esportes
+      </ion-button>
+    </div>
+
+    <!-- Article cards -->
+    <div class="cards">
+      <ion-card *ngFor="let art of articles" (click)="openArticle(art)">
+        <div class="card-image"></div>
+        <div class="card-footer">
+          <ion-avatar class="card-avatar">
+            <img src="assets/avatars/avatar1.png" />
+          </ion-avatar>
+          <div class="card-text">
+            <div class="card-source">Pinho • 3h</div>
+            <div class="card-title">{{ art.title || (art.description | slice:0:60) }}</div>
+          </div>
+        </div>
+      </ion-card>
+    </div>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadNews($event)" *ngIf="!noMore">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais notícias..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

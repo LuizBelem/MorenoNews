@@ -1,0 +1,32 @@
+.config-content {
+  --background: #05030b;
+
+  ion-card {
+    margin: 24px 16px;
+    background: #1e1733;
+    color: #fff;
+    border-radius: 20px;
+  }
+
+  ion-item {
+    --background: transparent;
+    --color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .avatar-list {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .avatar-option {
+    padding: 4px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+  }
+
+  .avatar-option.selected {
+    border-color: #bb86fc;
+  }
+}
