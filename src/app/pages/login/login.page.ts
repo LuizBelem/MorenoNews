@@ -24,4 +24,15 @@ export class LoginPage {
     this.auth.login(this.name, this.email);
     this.router.navigateByUrl('/home', { replaceUrl: true });
   }
+
+  // 🔹 Adicione esta função:
+  goHome() {
+    this.router.navigate(['/home']);
+  }
+
+  // Logout: limpa o usuário e retorna para a home
+  logout() {
+    this.auth.logout();
+    this.router.navigateByUrl('/home', { replaceUrl: true });
+  }
 }

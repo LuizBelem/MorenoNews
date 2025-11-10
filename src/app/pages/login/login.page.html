@@ -5,7 +5,13 @@
 </ion-header>
 
 <ion-content class="login-content">
+  <div class="top-controls">
+    <ion-button fill="clear" (click)="goHome()" class="back-btn">
+  ← Voltar
+    </ion-button>
+  </div>
   <div class="logo-box">
+    <div class="logo-icon">MN</div>
     <h2>MORENO</h2>
   </div>
 
@@ -31,4 +37,9 @@
       </ion-button>
     </ion-card-content>
   </ion-card>
+  <div class="logout-wrap">
+    <ion-button expand="block" class="btn-logout" (click)="logout()">
+      Sair
+    </ion-button>
+  </div>
 </ion-content>

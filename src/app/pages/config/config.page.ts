@@ -8,6 +8,7 @@ import {
   Theme,
   FontSize
 } from '../../services/settings';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-config',
@@ -27,7 +28,7 @@ export class ConfigPage {
     'assets/avatars/avatar3.png'
   ];
 
-  constructor(private settings: SettingsService, private router: Router) {
+  constructor(private settings: SettingsService, private router: Router, private auth: AuthService) {
     const s = this.settings.current;
     this.theme = s.theme;
     this.fontSize = s.fontSize;
@@ -54,5 +55,11 @@ export class ConfigPage {
   toggleTheme(event: any) {
     this.theme = event.detail.checked ? 'dark' : 'light';
     this.apply();
+  }
+
+  // Logout helper: limpa o usuário e retorna para a home
+  logout() {
+    this.auth.logout();
+    this.router.navigateByUrl('/home', { replaceUrl: true });
   }
 }

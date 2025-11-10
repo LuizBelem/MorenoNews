@@ -2,9 +2,10 @@
   --background: #05030b;
 
   ion-card {
-    margin: 24px 16px;
+    margin: 24px 20px;
     background: #1e1733;
     color: #fff;
+    padding: 16px;
     border-radius: 20px;
   }
 
@@ -17,16 +18,19 @@
   .avatar-list {
     display: flex;
     gap: 12px;
-    margin-top: 12px;
+    margin-top: 20px;
   }
 
   .avatar-option {
     padding: 4px;
     border-radius: 999px;
+    margin-bottom: 15px;
+    transform: scale(1.2);
     border: 2px solid transparent;
   }
 
   .avatar-option.selected {
+    transform: scale(1.2);
     border-color: #bb86fc;
   }
 }
