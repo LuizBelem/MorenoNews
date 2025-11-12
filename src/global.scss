@@ -8,17 +8,115 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/* Temas */
-body.theme-dark {
-  --ion-background-color: #05030b;
-  --ion-text-color: #ffffff;
-  --ion-toolbar-background: #151027;
+/* Tema CLARO (padrão) */
+:root {
+  --bg-color: #f4f5f8;
+  --text-color: #121212;
+  --card-bg: #ffffff;
+  --card-text: #121212;
+  --input-bg: #e8e8e8;
+  --input-text: #000;
+  --border-color: #ddd;
+  --toolbar-bg: #f5f5f5;
+  --toolbar-text: #000;
 }
 
-body.theme-light {
-  --ion-background-color: #f5f5f5;
-  --ion-text-color: #111111;
-  --ion-toolbar-background: #ffffff;
+/* Tema ESCURO (quando body tiver a classe .dark-theme) */
+body.dark-theme {
+  --bg-color: #05030b;
+  --text-color: #e9dcff;
+  --card-bg: #1e1733;
+  --card-text: #e9dcff;
+  --input-bg: #2a2433;
+  --input-text: #e9dcff;
+  --border-color: #3a3f4d;
+  --toolbar-bg: #0f0814;
+  --toolbar-text: #e9dcff;
+}
+
+/* Aplicar variáveis em todos os elementos */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+ion-content {
+  --background: var(--bg-color);
+  color: var(--text-color);
+}
+
+ion-header,
+ion-toolbar {
+  --background: var(--toolbar-bg);
+  --color: var(--toolbar-text);
+}
+
+ion-card {
+  background: var(--card-bg);
+  color: var(--card-text);
+  --ion-background-color: var(--card-bg);
+}
+
+ion-card-header {
+  background: var(--card-bg);
+  color: var(--card-text);
+}
+
+ion-card-title {
+  color: var(--card-text);
+}
+
+ion-card-content {
+  color: var(--card-text);
+}
+
+ion-item {
+  --background: transparent;
+  --color: var(--text-color);
+  --border-color: var(--border-color);
+}
+
+ion-item.item-interactive {
+  --color: var(--text-color);
+}
+
+ion-label {
+  color: var(--text-color);
+}
+
+ion-input,
+ion-textarea,
+ion-searchbar {
+  --background: var(--input-bg);
+  --color: var(--input-text);
+}
+
+ion-input::placeholder {
+  color: var(--input-text);
+  opacity: 0.6;
+}
+
+ion-segment {
+  --background: transparent;
+  --border-color: var(--border-color);
+}
+
+ion-segment-button {
+  color: var(--text-color);
+  --color: var(--text-color);
+  --color-checked: var(--text-color);
+  --background: transparent;
+  --background-checked: var(--card-bg);
+}
+
+ion-toggle {
+  --background: var(--border-color);
+  --background-checked: #5555ff;
+  --handle-background: #fff;
+}
+
+ion-button {
+  --color: var(--text-color);
 }
 
 /* Tamanho de fonte */
@@ -41,3 +139,4 @@ ion-input,
 ion-searchbar {
   font-size: var(--app-font-size);
 }
+

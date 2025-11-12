@@ -15,6 +15,12 @@ ion-toolbar {
   padding: 0 8px;
 }
 
+/* Tema claro - toolbar */
+:host-context(body.light-theme) ion-toolbar {
+  --background: linear-gradient(90deg, #f5f5f5 0%, #efefef 50%, #e8e8e8 100%);
+  --color: #121212;
+}
+
 ion-title {
   display: flex;
   align-items: center;
@@ -38,6 +44,12 @@ ion-toolbar ion-button {
   padding-inline: 14px;
 }
 
+/* Tema claro - botão */
+:host-context(body.light-theme) ion-toolbar ion-button {
+  --background: linear-gradient(90deg, #8b3fff, #d63fe0);
+  --box-shadow: 0 4px 14px rgba(139, 63, 255, 0.4);
+}
+
 /* avatar no lugar do botão */
 ion-toolbar ion-avatar {
   width: 50px;
@@ -52,6 +64,13 @@ ion-toolbar ion-avatar {
   --background: #050407;
   background: radial-gradient(circle at top, #25153c 0%, #050407 45%, #020204 100%);
   color: #ffffff;
+}
+
+/* Tema claro - conteúdo */
+:host-context(body.light-theme) .home-content {
+  --background: #f4f5f8;
+  background: #f4f5f8;
+  color: #121212;
 }
 
 .home-content ::-webkit-scrollbar {
@@ -86,6 +105,17 @@ ion-searchbar {
   padding: 0;
   height: 40px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Tema claro - searchbar */
+:host-context(body.light-theme) ion-searchbar {
+  --background: #e8e8e8;
+  --color: #121212;
+  --placeholder-color: #666666;
+  --icon-color: #121212;
+  --clear-button-color: #121212;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .search-container .search-icon {
@@ -135,6 +165,12 @@ ion-searchbar .searchbar-input-container {
   padding: 6px;
 }
 
+/* Tema claro - cards de atalho */
+:host-context(body.light-theme) .recent-card {
+  background: linear-gradient(180deg, #f0f0f0 0%, #e5e5e5 100%);
+  color: #121212;
+}
+
 /* primeiro como avatar redondo */
 .recent-card:first-child {
   border-radius: 50%;
@@ -146,12 +182,11 @@ ion-searchbar .searchbar-input-container {
   box-shadow: 0 10px 20px rgba(0,0,0,0.6);
 }
 
-/* esconder texto nos cards, é só visual (igual ao mock) */
+
 .recent-card p {
   display: none;
 }
 
-/* ===== FILTROS (Explorar / Notícias / Esportes) ===== */
 
 .filters-container {
   display: flex;
@@ -170,6 +205,13 @@ ion-searchbar .searchbar-input-container {
   --box-shadow: 0 0 0 transparent;
   text-transform: none;
   font-size: 12px;
+}
+
+/* Tema claro - botões de filtro */
+:host-context(body.light-theme) .filters-container ion-button {
+  --border-color: rgba(0, 0, 0, 0.2);
+  --color: #121212;
+  --background: transparent;
 }
 
 /* botão ativo fica roxinho */
@@ -197,13 +239,25 @@ ion-card {
   position: relative;
 }
 
-/* “fade” do rodapé pra encaixar o texto */
+/* Tema claro - ion-card */
+:host-context(body.light-theme) ion-card {
+  background: #ffffff;
+  --background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* "fade" do rodapé pra encaixar o texto */
 ion-card::after {
   content: "";
   position: absolute;
   inset: auto 0 0 0;
   height: 40%;
   background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.6) 75%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+/* Tema claro - ion-card::after */
+:host-context(body.light-theme) ion-card::after {
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.1) 100%);
 }
 
 /* garante que o conteúdo fique por cima do fade */
@@ -228,11 +282,31 @@ ion-card-subtitle {
   color: #cccccc;
 }
 
+/* Tema claro - ion-card-title e subtitle */
+:host-context(body.light-theme) ion-card-title {
+  color: #121212;
+}
+
+:host-context(body.light-theme) ion-card-subtitle {
+  color: #666666;
+}
+
 /* conteúdo com texto na base */
 ion-card-content {
   padding: 26px 14px 12px;
   font-size: 11px;
   color: #ffffff;
+}
+
+/* Tema claro - ion-card-content */
+:host-context(body.light-theme) ion-card-content {
+  color: #333333;
+}
+
+.logo-box{
+  width: 130px;
+  height: auto;
+  margin-top: 5px;
 }
 
 /* custom card internal image placeholder */
@@ -262,6 +336,10 @@ ion-card-content {
 }
 .card-text .card-source { color: #e6e6e6; font-size: 11px; }
 .card-text .card-title { color: #ffffff; font-weight: 600; font-size: 13px; }
+
+/* Tema claro - card-text */
+:host-context(body.light-theme) .card-text .card-source { color: #999999; }
+:host-context(body.light-theme) .card-text .card-title { color: #121212; }
 
 /* infinite scroll (spinner) */
 ion-infinite-scroll-content {

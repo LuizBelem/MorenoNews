@@ -16,7 +16,7 @@ export class NewsService {
   ): Observable<any> {
     let params = new HttpParams()
       .set('apiKey', this.API_KEY)
-      .set('country', 'br')
+      .set('country', 'us')
       .set('page', page)
       .set('pageSize', pageSize);
 

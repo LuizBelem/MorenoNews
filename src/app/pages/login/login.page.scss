@@ -1,134 +1,169 @@
 .login-content {
+  position: relative;
   min-height: 100vh;
-  --background: radial-gradient(circle at top, #281460 0%, #05030b 70%);
-
-  background-image: url('/src/assets/fundo.png'), var(--background);
-  background-repeat: no-repeat, no-repeat;
-  background-position: center top, center top;
-  background-size: cover, cover;
+  background: var(--bg-color);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 24px 16px;
+}
 
-  .logo-box {
-    text-align: center;
-    padding-top: 28px;
-    color: #fff;
+/* Fundo dinâmico baseado no tema - escuro */
+:host-context(body.dark-theme) .login-content {
+  background-image: radial-gradient(circle at top, #281460 0%, #05030b 70%);
+  background-repeat: no-repeat, no-repeat;
+  background-position: center top, center top;
+  background-size: cover, cover;
+  background-attachment: fixed;
+}
 
-    .logo-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #7a3cff 0%, #cc39ff 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: #fff;
-      box-shadow: 0 8px 26px rgba(120, 30, 200, 0.35);
-      font-size: 18px;
-    }
+/* Imagem visível apenas no tema escuro */
+:host-context(body.dark-theme) .fundo-img {
+  display: block;
+}
 
-    h2 {
-      margin-top: 12px;
-      font-size: 18px;
-      letter-spacing: 4px;
-      color: #caa3ff;
-      text-shadow: 0 2px 8px rgba(40, 20, 80, 0.45);
-    }
-  }
+/* Imagem oculta no tema claro */
+:host-context(body.light-theme) .fundo-img {
+  display: none;
+}
 
-  .top-controls {
-    width: 100%;
-    max-width: 360px;
+/* IMAGEM DE FUNDO */
+.fundo-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.35;
+}
+
+/* Conteúdo acima da imagem */
+.top-controls,
+.back-btn {
+  z-index: 10;
+}
+
+.logo-box {
+  text-align: center;
+  padding-top: 28px;
+  color: var(--text-color);
+
+  .logo-icon {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #7a3cff 0%, #cc39ff 100%);
     display: flex;
-    justify-content: flex-start;
-    margin-top: 6px;
-    margin-bottom: 6px;
-  }
-
-  .back-btn {
-    --color: #caa3ff;
-    font-size: 14px;
-    padding-left: 0;
-    padding-right: 0;
-    --background: transparent;
-  }
-
-  .login-card {
-    width: 100%;
-    max-width: 360px;
-    margin: 36px 30px;
-    border-radius: 16px;
-    background: rgba(30, 23, 51, 0.58);
-    color: #fff;
-    padding: 18px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(8px);
-
-    ion-card-content {
-      padding: 0;
-    }
-
-    ion-item {
-      --background: transparent;
-      --color: #fff;
-      margin-bottom: 14px;
-      border-radius: 12px;
-      padding: 0;
-
-      ion-label {
-        color: #d8d8e8;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 6px;
-      }
-
-      ion-input {
-        display: block;
-        border-radius: 999px;
-        background: #f2f2f2;
-        padding: 10px 14px;
-        color: #111;
-        height: 42px;
-        --padding-start: 14px;
-        --padding-end: 14px;
-      }
-    }
-
-    .btn-login {
-      margin-top: 8px;
-      --background: #f5f5f5;
-      --color: #1e1733;
-      border-radius: 999px;
-      height: 44px;
-      font-weight: 700;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
-    }
-  }
-
-  .logout-wrap {
-    width: 100%;
-    max-width: 360px;
-    margin-top: 16px;
-    margin-bottom: 18px;
-    display: flex;
+    align-items: center;
     justify-content: center;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 8px 26px rgba(120, 30, 200, 0.35);
+    font-size: 18px;
   }
 
-  .btn-logout {
-    --background: transparent;
-    --color: #e9dcff;
-    border-radius: 999px;
-    height: 40px;
-    width: 140px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(4px);
-    font-weight: 700;
+  h2 {
+    margin-top: 12px;
+    font-size: 18px;
+    letter-spacing: 4px;
+    color: var(--text-color);
+    text-shadow: 0 2px 8px rgba(40, 20, 80, 0.45);
   }
+}
+
+.top-controls {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.back-btn {
+  color: var(--text-color);
+  font-size: 14px;
+  padding-left: 0;
+  padding-right: 0;
+  --background: transparent;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  margin: 36px 30px;
+  border-radius: 16px;
+  background: var(--card-bg);
+  color: var(--card-text);
+  padding: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+
+  ion-card-content {
+    padding: 0;
+  }
+
+  ion-item {
+    --background: transparent;
+    --color: var(--text-color);
+    margin-bottom: 14px;
+    border-radius: 12px;
+    padding: 0;
+
+    ion-label {
+      color: var(--text-color);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    ion-input {
+      display: block;
+      border-radius: 999px;
+      background: var(--input-bg);
+      padding: 10px 14px;
+      color: var(--input-text);
+      height: 42px;
+      --padding-start: 14px;
+      --padding-end: 14px;
+    }
+  }
+
+  .btn-login {
+    margin-top: 8px;
+    --background: var(--input-bg);
+    --color: var(--text-color);
+    border-radius: 999px;
+    height: 44px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.logout-wrap {
+  width: 100%;
+  max-width: 360px;
+  margin-top: 16px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-logout {
+  --background: transparent;
+  --color: var(--text-color);
+  border-radius: 999px;
+  margin-left: 50px;
+  height: 40px;
+  width: 140px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(4px);
+  font-weight: 700;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,7 @@ import {
   FontSize
 } from '../../services/settings';
 import { AuthService } from '../../services/auth';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-config',
@@ -17,8 +18,8 @@ import { AuthService } from '../../services/auth';
   styleUrls: ['./config.page.scss'],
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class ConfigPage {
-  theme: Theme = 'dark';
+export class ConfigPage implements OnInit {
+  theme: 'light' | 'dark' = 'dark';
   fontSize: FontSize = 'medium';
   avatar = '';
 
@@ -28,11 +29,19 @@ export class ConfigPage {
     'assets/avatars/avatar3.png'
   ];
 
-  constructor(private settings: SettingsService, private router: Router, private auth: AuthService) {
+  constructor(
+    private settings: SettingsService,
+    private router: Router,
+    private auth: AuthService,
+    private themeService: ThemeService
+  ) {
     const s = this.settings.current;
-    this.theme = s.theme;
     this.fontSize = s.fontSize;
     this.avatar = s.avatar;
+  }
+
+  ngOnInit() {
+    this.theme = this.themeService.getTheme();
   }
 
   goHome() {
@@ -41,7 +50,6 @@ export class ConfigPage {
 
   apply() {
     this.settings.update({
-      theme: this.theme,
       fontSize: this.fontSize,
       avatar: this.avatar
     });
@@ -53,8 +61,9 @@ export class ConfigPage {
   }
 
   toggleTheme(event: any) {
-    this.theme = event.detail.checked ? 'dark' : 'light';
-    this.apply();
+    const newTheme: 'light' | 'dark' = event.detail.value;
+    this.themeService.setTheme(newTheme);
+    this.theme = newTheme;
   }
 
   // Logout helper: limpa o usuário e retorna para a home

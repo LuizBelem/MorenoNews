@@ -2,12 +2,18 @@
   <ion-toolbar>
     <ion-title>Configurações</ion-title>
   </ion-toolbar>
-  <ion-button expand="block" fill="clear" shape="round" (click)="goHome()">
-    Retornar para Home
-  </ion-button>
 </ion-header>
 
 <ion-content class="config-content">
+
+    <img src="assets/fundo.png" class="fundo-img"/>
+
+  <div class="top-controls">
+    <ion-button fill="clear" (click)="goHome()" class="back-btn">
+      ← Voltar
+    </ion-button>
+  </div>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Personalização</ion-card-title>
@@ -16,11 +22,15 @@
     <ion-card-content>
       <!-- Tema -->
       <ion-item>
-        <ion-label>Tema escuro</ion-label>
-        <ion-toggle
-          [checked]="theme === 'dark'"
-          (ionChange)="toggleTheme($event)"
-        ></ion-toggle>
+        <ion-label>Tema</ion-label>
+        <ion-segment [(ngModel)]="theme" (ionChange)="toggleTheme($event)">
+          <ion-segment-button value="dark">
+            <ion-label>Escuro</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="light">
+            <ion-label>Claro</ion-label>
+          </ion-segment-button>
+        </ion-segment>
       </ion-item>
 
       <!-- Fonte -->

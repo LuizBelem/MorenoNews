@@ -5,6 +5,7 @@ import { IonicModule, InfiniteScrollCustomEvent } from '@ionic/angular';
 import { NewsService } from '../services/news';
 import { SettingsService } from '../services/settings';
 import { AuthService } from '../services/auth';
+import { ThemeService } from '../services/theme.service';
 import { Router } from '@angular/router';
 
 type FilterType = 'all' | 'news' | 'sports';
@@ -33,10 +34,15 @@ export class HomePage implements OnInit {
     private news: NewsService,
     private settings: SettingsService,
     private auth: AuthService,
+    private themeService: ThemeService,
     private router: Router
   ) {}
 
   ngOnInit() {
+    // Inicializa o tema
+    const theme = this.themeService.getTheme();
+    this.themeService.setTheme(theme);
+
     this.loadNews();
 
     this.settings.settings$.subscribe(s => {
