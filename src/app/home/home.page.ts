@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, InfiniteScrollCustomEvent } from '@ionic/angular';
+import { IonicModule, InfiniteScrollCustomEvent} from '@ionic/angular';
+import { SourceNamePipe } from '../pipes/source-name.pipe';
 import { NewsService } from '../services/news';
 import { SettingsService } from '../services/settings';
 import { AuthService } from '../services/auth';
 import { ThemeService } from '../services/theme.service';
 import { Router } from '@angular/router';
+import { HighlightDirective } from '../diretiva/highlight.directive';
 
 type FilterType = 'all' | 'news' | 'sports';
 @Component({
@@ -14,7 +16,7 @@ type FilterType = 'all' | 'news' | 'sports';
   standalone: true,
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, SourceNamePipe, HighlightDirective]
 })
 export class HomePage implements OnInit {
   articles: any[] = [];

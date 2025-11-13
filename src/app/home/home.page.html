@@ -65,18 +65,21 @@
     </div>
 
     <div class="cards">
-      <ion-card *ngFor="let art of articles" (click)="openArticle(art)">
+      <ion-card *ngFor="let art of articles" appHighlight="#f24dfc" (click)="openArticle(art)">
         <img *ngIf="art.urlToImage" [src]="art.urlToImage" alt="Imagem da notícia" class="card-image" />
-        <div class="card-footer">
-          <ion-avatar class="card-avatar">
-            <img src="assets/avatars/avatar1.png" />
-          </ion-avatar>
-          <div class="card-text">
-            <div class="card-source">Pinho • 3h</div>
-            <div class="card-title">{{ art.title || (art.description | slice:0:60) }}</div>
+          <div class="card-footer">
+            <ion-avatar class="card-avatar">
+              <img src="assets/avatars/avatar1.png" />
+            </ion-avatar>
+            <div class="card-text">
+              <div class="card-source">
+                {{ art.source | sourceName }} • {{ art.publishedAt | date:'short' }}
+              </div>
+              <div class="card-title">{{ art.title || (art.description | slice:0:60) }}</div>
+            </div>
           </div>
-        </div>
       </ion-card>
+
     </div>
   </div>
   <ion-infinite-scroll threshold="0px" (ionInfinite)="onInfinite($event)">
