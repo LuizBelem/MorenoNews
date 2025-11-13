@@ -64,7 +64,6 @@ export class HomePage implements OnInit {
   }
 
   loadNews(event?: InfiniteScrollCustomEvent) {
-    console.log('▶ loadNews chamado — page:', this.page, 'loading:', this.loading, 'noMore:', this.noMore, 'articles:', this.articles.length);
     if (this.loading || this.noMore) {
       event?.target.complete();
       return;
@@ -85,10 +84,6 @@ export class HomePage implements OnInit {
 
     observable.subscribe({
       next: res => {
-        console.log('✅ API retornou (page):', this.page, ' totalResults:', res.totalResults, ' newArticles:', (res.articles || []).length);
-      // depois de mesclar:
-      console.log('➡ Após merge — articles length:', this.articles.length);
-        console.log('✅ API retornou:', res);
         const newArticles = (res as any).articles || [];
         if (newArticles.length === 0) {
           this.noMore = true;
@@ -144,7 +139,6 @@ export class HomePage implements OnInit {
   }
 
   onInfinite(ev: any) {
-    console.log('⚡ Infinite scroll disparado!', ev);
     this.loadNews(ev);
   }
 
