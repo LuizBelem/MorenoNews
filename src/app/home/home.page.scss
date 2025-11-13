@@ -84,7 +84,7 @@ ion-toolbar ion-avatar {
 }
 
 .container {
-  padding-bottom: 24px;
+  height: auto;
 }
 
 /* ===== SEARCHBAR ===== */
@@ -130,15 +130,14 @@ ion-searchbar {
   align-items: center;
   justify-content: center;
 }
-.search-container .search-icon img{ width:20px; height:20px; filter: invert(1) hue-rotate(260deg) saturate(1.2); }
+.search-container .search-icon img{ width:20px; height:20px;}
 
 /* tirar bordas internas padrão do iOS/MD */
 ion-searchbar .searchbar-input-container {
   border-radius: 999px !important;
 }
 
-/* ===== ATALHOS (bolinha + quadradinhos) ===== */
-
+/* 
 .recent-container {
   display: flex;
   align-items: center;
@@ -147,7 +146,6 @@ ion-searchbar .searchbar-input-container {
   overflow-x: auto;
 }
 
-/* estilo geral dos cards de atalho */
 .recent-card {
   min-width: 42px;
   min-height: 42px;
@@ -165,13 +163,15 @@ ion-searchbar .searchbar-input-container {
   padding: 6px;
 }
 
-/* Tema claro - cards de atalho */
+
+
+
 :host-context(body.light-theme) .recent-card {
   background: linear-gradient(180deg, #f0f0f0 0%, #e5e5e5 100%);
   color: #121212;
 }
 
-/* primeiro como avatar redondo */
+
 .recent-card:first-child {
   border-radius: 50%;
   width: 66px;
@@ -186,7 +186,7 @@ ion-searchbar .searchbar-input-container {
 .recent-card p {
   display: none;
 }
-
+*/
 
 .filters-container {
   display: flex;
@@ -233,7 +233,6 @@ ion-card {
   --background: transparent;
   margin: 18px 14px;
   border-radius: 18px;
-  overflow: hidden;
   background: transparent;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   position: relative;
@@ -315,18 +314,21 @@ ion-card-content {
   border-radius: 18px;
 }
 .card-image {
-  height: 220px;
-  background: #e9e9e9;
+  width: 100%;
+  height: auto;
   border-radius: 12px;
-  margin: 12px;
+  margin: 0;
+  display: block;
+  object-fit: cover;
 }
+
+
 .card-footer {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px;
   position: relative;
-  margin-top: -36px;
 }
 .card-avatar {
   width: 36px;
@@ -341,7 +343,10 @@ ion-card-content {
 :host-context(body.light-theme) .card-text .card-source { color: #999999; }
 :host-context(body.light-theme) .card-text .card-title { color: #121212; }
 
-/* infinite scroll (spinner) */
+ion-content {
+  overflow-y: auto;
+}
+
 ion-infinite-scroll-content {
   --color: #ffffff;
 }

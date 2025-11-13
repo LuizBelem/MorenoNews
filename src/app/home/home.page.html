@@ -26,17 +26,15 @@
         showCancelButton="false"
       ></ion-searchbar>
       <button class="search-icon" aria-hidden>
-        <img src="assets/tv-icon.png" alt="tv" />
+        <img src="../../assets/tv.png" alt="tv" />
       </button>
     </div>
 
-    <!-- Avatars / shortcuts -->
-    <div class="recent-container">
+    <!-- <div class="recent-container">
       <div class="recent-card avatar-big"></div>
       <div class="recent-card" *ngFor="let i of [1,2,3,4,5]"></div>
-    </div>
+    </div>-->
 
-    <!-- Filters -->
     <div class="filters-container">
       <ion-button
         fill="outline"
@@ -66,10 +64,9 @@
       </ion-button>
     </div>
 
-    <!-- Article cards -->
     <div class="cards">
       <ion-card *ngFor="let art of articles" (click)="openArticle(art)">
-        <div class="card-image"></div>
+        <img *ngIf="art.urlToImage" [src]="art.urlToImage" alt="Imagem da notícia" class="card-image" />
         <div class="card-footer">
           <ion-avatar class="card-avatar">
             <img src="assets/avatars/avatar1.png" />
@@ -81,9 +78,9 @@
         </div>
       </ion-card>
     </div>
-
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadNews($event)" *ngIf="!noMore">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais notícias..."></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
   </div>
+  <ion-infinite-scroll threshold="0px" (ionInfinite)="onInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
