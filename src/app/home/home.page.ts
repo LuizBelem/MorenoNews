@@ -10,7 +10,7 @@ import { ThemeService } from '../services/theme.service';
 import { Router } from '@angular/router';
 import { HighlightDirective } from '../diretiva/highlight.directive';
 
-type FilterType = 'all' | 'news' | 'sports';
+type FilterType = 'news' | 'sports' | 'music';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
   loading = false;
   noMore = false;
 
-  filter: FilterType = 'all';
+  filter: FilterType = 'news';
   searchText = '';
 
   lastArticles: any[] = [];
@@ -71,13 +71,17 @@ export class HomePage implements OnInit {
     }
     this.loading = true;
 
-    const observable = this.searchText
-      ? this.news.searchEverything(this.searchText, this.page, this.pageSize)
+  const observable =
+    this.searchText
+    ? this.news.searchEverything(this.searchText, this.page, this.pageSize)
+    : this.filter === 'music'
+      ? this.news.searchEverything('music', this.page, this.pageSize)
       : this.news.getTopHeadlines(
           this.page,
           this.pageSize,
           this.categoryForFilter
         );
+
 
     observable.subscribe({
       next: res => {

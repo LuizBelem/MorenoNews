@@ -23,11 +23,7 @@
         placeholder="Pesquisar na Web"
         (ionChange)="onSearchChange($event)"
         [value]="searchText"
-        showCancelButton="false"
       ></ion-searchbar>
-      <button class="search-icon" aria-hidden>
-        <img src="../../assets/tv.png" alt="tv" />
-      </button>
     </div>
 
     <!-- <div class="recent-container">
@@ -35,34 +31,35 @@
       <div class="recent-card" *ngFor="let i of [1,2,3,4,5]"></div>
     </div>-->
 
-    <div class="filters-container">
-      <ion-button
-        fill="outline"
-        size="small"
-        [color]="filter === 'all' ? 'primary' : 'medium'"
-        (click)="onFilterChange('all')"
-      >
-        Explorar
-      </ion-button>
+<div class="filters-container">
+  <ion-button
+    fill="outline"
+    size="small"
+    [color]="filter === 'news' ? 'primary' : 'medium'"
+    (click)="onFilterChange('news')"
+  >
+    Notícias
+  </ion-button>
 
-      <ion-button
-        fill="outline"
-        size="small"
-        [color]="filter === 'news' ? 'primary' : 'medium'"
-        (click)="onFilterChange('news')"
-      >
-        Notícias
-      </ion-button>
+  <ion-button
+    fill="outline"
+    size="small"
+    [color]="filter === 'sports' ? 'primary' : 'medium'"
+    (click)="onFilterChange('sports')"
+  >
+    Esportes
+  </ion-button>
 
-      <ion-button
-        fill="outline"
-        size="small"
-        [color]="filter === 'sports' ? 'primary' : 'medium'"
-        (click)="onFilterChange('sports')"
-      >
-        Esportes
-      </ion-button>
-    </div>
+  <ion-button
+    fill="outline"
+    size="small"
+     [color]="filter === 'music' ? 'primary' : 'medium'"
+    (click)="onFilterChange('music')"
+  >
+    Música
+  </ion-button>
+</div>
+
 
     <div class="cards">
       <ion-card *ngFor="let art of articles" appHighlight="#f24dfc" (click)="openArticle(art)">
